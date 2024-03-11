@@ -1,4 +1,17 @@
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "My training project page",
+  description: "Start develop",
+  authors: [{ name: "Likie" }],
+};
+
+// export async function generateMetadata(){
+//   return {
+//     title: 'Metadata'
+//   }
+// }
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
