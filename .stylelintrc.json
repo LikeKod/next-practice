@@ -1,6 +1,7 @@
 {
 	"extends": [
-		"stylelint-config-standard"
+		"stylelint-config-standard",
+		"stylelint-order-config-standard"
 	],
 	"plugins": [
 		"stylelint-order"
@@ -9,7 +10,6 @@
 		"indentation": [
 			"tab"
 		],
-		
-		"selector-class-pattern": null
+		"color-hex-case": "upper"
 	}
 }
