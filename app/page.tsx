@@ -1,6 +1,6 @@
 
 import { Metadata } from "next";
-import { AppProps } from "next/dist/shared/lib/router/router";
+// import { AppProps } from "next/dist/shared/lib/router/router";
 import Head from "next/head";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Likie" }],
 };
 
-export default function Home({ Component, pageProps }: AppProps): JSX.Element {
+export default function Home(): JSX.Element {
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ export default function Home({ Component, pageProps }: AppProps): JSX.Element {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
       </Head>
-      <Component {...pageProps} />
+      {/* <Component {...pageProps} /> */}
     </>
   );
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { Htag } from "@/components";
+import { Button, Htag } from "@/components";
 // import type { Metadata } from "next";
 import "./globals.css";
 
@@ -13,6 +13,7 @@ import "./globals.css";
 export default function RootLayout() {
   return (<>
     <Htag tag='h1'>Text</Htag>
+    <Button appearance="primary">Button</Button>
   </>
   );
 }
