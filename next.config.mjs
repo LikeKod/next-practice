@@ -1,8 +1,20 @@
 /** @type {import('next').NextConfig} */
-export function webpack(config) {
+export const images = {
+    domains: ['courses-top.ru']
+};
+export function webpack(config, options) {
     config.module.rules.push({
-        test: /\.svg$/i,
-        use: ['@svgr/webpack'],
+        loader: '@svgr/webpack',
+        options: {
+            prettier: false,
+            svgo: true,
+            svgoConfig: {
+                plugins: [{ removeViewBox: false }],
+            },
+            titleProp: true,
+        },
+        test: /\.svg$/,
     });
+
     return config;
 }
