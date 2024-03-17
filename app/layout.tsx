@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Htag } from "@/components";
+import { Button, Htag, Paragraph } from "../components/index";
 // import type { Metadata } from "next";
 import "./globals.css";
 import Logo from '../public/vercel.svg';
@@ -16,6 +16,9 @@ export default function RootLayout() {
     <Htag tag='h1'>Text</Htag>
     <Logo />
     <Button appearance="primary" arrow="down">Button</Button>
+    <Paragraph size="l">Big</Paragraph>
+    <Paragraph>Medium</Paragraph>
+    <Paragraph size="s">Small</Paragraph>
   </>
   );
 }
