@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Htag, Paragraph } from "../components/index";
+import { Button, Htag, Paragraph, Rating } from "../components/index";
 // import type { Metadata } from "next";
 import "./globals.css";
 import Logo from '../public/vercel.svg';
@@ -19,6 +19,7 @@ export default function RootLayout() {
     <Paragraph size="l">Big</Paragraph>
     <Paragraph>Medium</Paragraph>
     <Paragraph size="s">Small</Paragraph>
+    <Rating rating={4} />
   </>
   );
 }
