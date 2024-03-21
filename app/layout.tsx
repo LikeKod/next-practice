@@ -4,6 +4,7 @@ import { Button, Htag, Paragraph, Rating } from "../components/index";
 // import type { Metadata } from "next";
 import "./globals.css";
 import Logo from '../public/vercel.svg';
+import { useState } from "react";
 
 
 // export const metadata: Metadata = {
@@ -12,6 +13,9 @@ import Logo from '../public/vercel.svg';
 // };
 
 export default function RootLayout() {
+
+  const [rating, setRating] = useState<number>(4)
+
   return (<>
     <Htag tag='h1'>Text</Htag>
     <Logo />
@@ -19,7 +23,7 @@ export default function RootLayout() {
     <Paragraph size="l">Big</Paragraph>
     <Paragraph>Medium</Paragraph>
     <Paragraph size="s">Small</Paragraph>
-    <Rating rating={4} />
+    <Rating rating={rating} isEditable setRating={setRating}/>
   </>
   );
 }
