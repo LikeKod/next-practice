@@ -4,7 +4,7 @@ import { Footer } from "../components/Footer/Footer";
 import { Header } from "../components/Header/Header";
 import { SideBar } from "../components/SideBar/SideBar";
 // import type { Metadata } from "next";
-import "./globals.css";
+import styles from "./layout.module.css";
 
 
 
@@ -21,14 +21,14 @@ export default function RootLayout({
 
   return (<html lang='en'>
     <body>
-      <Header />
-      <div>
-        <SideBar />
-        <div>
+      <div className={styles.wrapper}>
+        <Header className={styles.header}/>
+        <SideBar className={styles.sidebar}/>
+        <div className={styles.body}>
           {children}
         </div>
+        <Footer className={styles.footer}/>
       </div>
-      <Footer />
     </body>
   </html>
   );
