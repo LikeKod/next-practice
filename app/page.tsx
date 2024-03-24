@@ -7,6 +7,7 @@ import Logo from '../public/vercel.svg';
 // import { Metadata } from "next";
 // import { AppProps } from "next/dist/shared/lib/router/router";
 import Head from "next/head";
+import RootLayout from "./layout";
 
 // export const metadata: Metadata = {
 //   title: "My training project page",
@@ -26,7 +27,7 @@ export default function Home(): JSX.Element {
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
       </Head>
       <Htag tag='h1'>Text</Htag>
-      <Logo />
+      {/* <Logo /> */}
       <Button appearance="primary" arrow="down">Button</Button>
       <Paragraph size="l">Big</Paragraph>
       <Paragraph>Medium</Paragraph>
