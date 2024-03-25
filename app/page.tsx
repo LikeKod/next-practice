@@ -1,13 +1,12 @@
-'use client';
 
 import { useState } from "react";
 import { Button, Htag, Paragraph, Rating } from "../components/index";
-import Logo from '../public/vercel.svg';
-
 // import { Metadata } from "next";
 // import { AppProps } from "next/dist/shared/lib/router/router";
 import Head from "next/head";
-import RootLayout from "./layout";
+import axios from 'axios';
+import { GetStaticProps } from "next";
+import { MenuItem } from "../interfaces/menu.interface";
 
 // export const metadata: Metadata = {
 //   title: "My training project page",
@@ -15,8 +14,7 @@ import RootLayout from "./layout";
 //   authors: [{ name: "Likie" }],
 // };
 
-export default function Home(): JSX.Element {
-  const [rating, setRating] = useState<number>(4);
+export default function Home({menu, firstCategory}: HomeProps): JSX.Element {
 
   return (
     <>
@@ -32,8 +30,26 @@ export default function Home(): JSX.Element {
       <Paragraph size="l">Big</Paragraph>
       <Paragraph>Medium</Paragraph>
       <Paragraph size="s">Small</Paragraph>
-      <Rating rating={rating} isEditable setRating={setRating} />
+      <Rating rating={4} isEditable />
       {/* <Component {...pageProps} /> */}
     </>
   );
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const firstCategory = 0;
+  const {data: menu} = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+    firstCategory
+  });
+  return {
+    props: {
+      menu,
+      firstCategory
+    }
+  };
+};
+
+interface HomeProps extends Record<string, unknown>{
+  menu: MenuItem[];
+  firstCategory: number;
 }
