@@ -1,8 +1,8 @@
 'use client';
 
-import { Footer } from "../components/Footer/Footer";
-import { Header } from "../components/Header/Header";
-import { SideBar } from "../components/SideBar/SideBar";
+import { Footer } from "../../components/Footer/Footer";
+import { Header } from "../../components/Header/Header";
+import { SideBar } from "../../components/SideBar/SideBar";
 // import type { Metadata } from "next";
 import styles from "./layout.module.css";
 

@@ -1,12 +1,12 @@
 
-import { Button, Htag, Paragraph, Rating } from "../components/index";
+import { Button, Htag, Paragraph, Rating } from "../../components/index";
 // import { Metadata } from "next";
 // import { AppProps } from "next/dist/shared/lib/router/router";
 import axios from 'axios';
 import { GetStaticProps, Metadata } from "next";
-import { MenuItem } from "../interfaces/menu.interface";
-import { getMenu } from "../api/menu";
-import Menu from "../components/menu/menu";
+import { MenuItem } from "../../interfaces/menu.interface";
+import { getMenu } from "../../api/menu";
+import Menu from "../../components/menu/menu";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -25,20 +25,6 @@ export default async function Home(){
   return (
     <main >
       <Menu />
-      {/* <Head>
-        <title>The best Top</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
-      </Head>
-      <Htag tag='h1'>Text</Htag> */}
-      {/* <Logo /> */}
-      {/* <Button appearance="primary" arrow="down">Button</Button>
-      <Paragraph size="l">Big</Paragraph>
-      <Paragraph>Medium</Paragraph>
-      <Paragraph size="s">Small</Paragraph>
-      <Rating rating={4} isEditable /> */}
-      {/* <Component {...pageProps} /> */}
     </main>
   );
 }
