@@ -5,7 +5,7 @@ export default async function Menu(){
     return (
       <main >
         <div>
-          {menu.length}
+          {JSON.stringify(menu)}
         </div>
       </main>
     );
