@@ -5,7 +5,7 @@ export default async function Menu(){
     return (
       <main >
         <div>
-          {JSON.stringify(menu)}
+          {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
         </div>
       </main>
     );
