@@ -1,5 +1,5 @@
 import { getMenu } from "../../api/menu";
-import { FirstLevelMenuItem } from "../../interfaces/menu.interface";
+import { FirstLevelMenuItem, PageItem } from "../../interfaces/menu.interface";
 import cn from 'clsx';
 import styles from './Menu.module.css';
 import CoursesIcon from './icons/courses.svg';
@@ -31,16 +31,34 @@ export default async function Menu(){
                       <span >{menu.name}</span>
                   </div>
                 </a>
+                {menu.id == TopLevelCategory.Courses && buildSecondLevel(menuItem)}
             </div>;
           })}
         </>
       );
     } ;
-    const buildSecondLevel = () => {
-
+    const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
+      return (
+        <div>
+          {menu.map(m => (
+            <div key={m._id.secondCategory}>
+              <div className={styles.secondLevel}>{m._id.secondCategory}</div>
+              <div className={cn(styles.secondLevelBlock, {
+                [styles.secondLevelOpened]: m.isOpened
+              })}>
+                {buildThirdLevel(m.pages, menuItem.route)}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
     } ;
-    const buildThirdLevel = () => {
-
+    const buildThirdLevel = (pages: PageItem[], route: string) => {
+      return (
+        <div>
+          
+        </div>
+      );
     } ;
 
     return (
