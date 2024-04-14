@@ -21,17 +21,17 @@ export default async function Menu(){
     const buildFirstLevel = () => {
       return (
         <>
-          {firstLevelMenu.map(menu => {
-            <div key={menu.route}>
-                <a href={`/${menu.route}`}>
+          {firstLevelMenu.map(m => {
+            <div key={m.route}>
+                <a href={`/${m.route}`}>
                   <div className={cn(styles.firstLevel, {
-                    [styles.firstLevelActive]: menu.id == TopLevelCategory.Courses
+                    [styles.firstLevelActive]: m.id == TopLevelCategory.Courses
                   })}>
-                      {menu.icon}
-                      <span >{menu.name}</span>
+                      {m.icon}
+                      <span >{m.name}</span>
                   </div>
                 </a>
-                {menu.id == TopLevelCategory.Courses && buildSecondLevel(menuItem)}
+                {m.id == TopLevelCategory.Courses && buildSecondLevel(m)}
             </div>;
           })}
         </>
@@ -55,9 +55,11 @@ export default async function Menu(){
     } ;
     const buildThirdLevel = (pages: PageItem[], route: string) => {
       return (
-        <div>
-          
-        </div>
+        pages.map(p => (
+          <a href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
+            [styles.thirdLevelActive]: true
+          })}>{p.category}</a>
+        ))
       );
     } ;
 
