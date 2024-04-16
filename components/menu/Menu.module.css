@@ -40,6 +40,14 @@
     margin-bottom: 20px;
 }
 
+.secondBlockOpened {
+    display: block;
+}
+
+.secondLevelBlock {
+    display: none;
+}
+
 .thirdLevel {
     margin-bottom: 10px;
     display: block;
