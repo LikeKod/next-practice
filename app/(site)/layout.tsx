@@ -14,9 +14,11 @@ import styles from "./layout.module.css";
 // };
 
 export default function RootLayout({
-  children,
+  children, one, two
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode,
+  one: React.ReactNode,
+  two: React.ReactNode
 }>) {
 
   return (<html lang='en'>
@@ -26,6 +28,8 @@ export default function RootLayout({
         <SideBar className={styles.sidebar}/>
         <div className={styles.body}>
           {children}
+          {one}
+          {two}
         </div>
         <Footer className={styles.footer}/>
       </div>

@@ -2,20 +2,11 @@ import { getMenu } from "../../api/menu";
 import { FirstLevelMenuItem, PageItem } from "../../interfaces/menu.interface";
 import cn from 'clsx';
 import styles from './Menu.module.css';
-import CoursesIcon from './icons/courses.svg';
-import ServicesIcon from './icons/services.svg';
-import BooksIcon from './icons/books.svg';
-import ProductsIcon from './icons/products.svg';
 import { TopLevelCategory } from "../../interfaces/page.interface";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { firstLevelMenu } from "../../helpers/helpers";
 
-const firstLevelMenu: FirstLevelMenuItem[] = [
-  { route: 'courses', name: 'Courses', icon: <CoursesIcon />, id: TopLevelCategory.Courses },
-  { route: 'servisec', name: 'Services', icon: <ServicesIcon />, id: TopLevelCategory.Services },
-  { route: 'books', name: 'Books', icon: <BooksIcon />, id: TopLevelCategory.Books },
-  { route: 'products', name: 'Products', icon: <ProductsIcon />, id: TopLevelCategory.Products },
-];
 
 export default async function Menu() {
   const menu = await getMenu(0);
@@ -23,7 +14,7 @@ export default async function Menu() {
 
   const openSecondLevel = (secondCategory: string) => {
     setMenu && setMenu(menu.map(m => {
-      if(m._id.secondCategory == secondCategory){
+      if (m._id.secondCategory == secondCategory) {
         m.isOpened = !m.isOpened;
       }
       return m;
@@ -36,14 +27,12 @@ export default async function Menu() {
         {firstLevelMenu.map(m => {
           <div key={m.route}>
             <Link href={`/${m.route}`}>
-              <a>
-                <div className={cn(styles.firstLevel, {
-                  [styles.firstLevelActive]: m.id == TopLevelCategory.Courses
-                })}>
-                  {m.icon}
-                  <span >{m.name}</span>
-                </div>
-              </a>
+              <div className={cn(styles.firstLevel, {
+                [styles.firstLevelActive]: m.id == TopLevelCategory.Courses
+              })}>
+                {m.icon}
+                <span >{m.name}</span>
+              </div>
             </Link>
             {m.id == TopLevelCategory.Courses && buildSecondLevel(m)}
           </div>;
@@ -75,10 +64,10 @@ export default async function Menu() {
   const buildThirdLevel = (pages: PageItem[], route: string) => {
     return (
       pages.map(p => (
-        <Link href={`/${route}/${p.alias}`}>
-          <a className={cn(styles.thirdLevel, {
-            [styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
-          })}>{p.category}</a>
+        <Link href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
+          [styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
+        })}>
+          {p.category}
         </Link>
       ))
     );
