@@ -13,12 +13,12 @@ export default async function Menu() {
   const router = useRouter();
 
   const openSecondLevel = (secondCategory: string) => {
-    setMenu && setMenu(menu.map(m => {
-      if (m._id.secondCategory == secondCategory) {
-        m.isOpened = !m.isOpened;
-      }
-      return m;
-    }));
+    // setMenu && setMenu(menu.map(m => {
+    //   if (m._id.secondCategory == secondCategory) {
+    //     m.isOpened = !m.isOpened;
+    //   }
+    //   return m;
+    // }));
   };
 
   const buildFirstLevel = () => {
