@@ -1,6 +1,7 @@
 import { Htag, Tag } from '../../components'
 import { TopPageComponentProps } from './TopPageComponent.props'
 import styles from './TopPageComponent.module.css'
+import { Card } from '../../components/Card/Card';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
     return (
@@ -15,9 +16,9 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
             </div>
             <div className={styles.hhTitle}>
                 <Htag tag='h2'>Vacation - {page.category}</Htag>
-                {products && <Tag color='red' size='m'>hh.ru</Tag>}
-                <span>Sort</span>
+                <Tag color='red' size='m'>hh.ru</Tag>
             </div>
+            
 
         </div>
     );
