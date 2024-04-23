@@ -1,8 +1,8 @@
 import { Card } from "../Card/Card";
 import { HhDataProps } from "./HhDate.props";
 import styles from './HhDate.module.css';
-import cn from 'clsx';
 import RateIcon from './rate.svg';
+import { priceRu } from "../../helpers/helpers";
 
 export const HhData = ({ count, juniorSalary, middleSalary, seniorSelery }: HhDataProps): JSX.Element => {
     return (
@@ -21,7 +21,7 @@ export const HhData = ({ count, juniorSalary, middleSalary, seniorSelery }: HhDa
                         Begner
                     </div>
                     <div className={styles.salaryValue}>
-                        {juniorSalary}
+                        {priceRu(juniorSalary)}
                     </div>
                     <div className={styles.rate}>
                         <RateIcon className={styles.filled} />
@@ -34,7 +34,7 @@ export const HhData = ({ count, juniorSalary, middleSalary, seniorSelery }: HhDa
                         Middle
                     </div>
                     <div className={styles.salaryValue}>
-                        {middleSalary}
+                        {priceRu(middleSalary)}
                     </div>
                     <div className={styles.rate}>
                         <RateIcon className={styles.filled} />
@@ -47,7 +47,7 @@ export const HhData = ({ count, juniorSalary, middleSalary, seniorSelery }: HhDa
                         Professional
                     </div>
                     <div className={styles.salaryValue}>
-                        {seniorSelery}
+                        {priceRu(seniorSelery)}
                     </div>
                     <div className={styles.rate}>
                         <RateIcon className={styles.filled} />

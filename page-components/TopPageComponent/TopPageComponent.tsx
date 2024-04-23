@@ -1,7 +1,6 @@
-import { HhData, Htag, Tag } from '../../components'
-import { TopPageComponentProps } from './TopPageComponent.props'
-import styles from './TopPageComponent.module.css'
-import { Card } from '../../components/Card/Card';
+import { HhData, Htag, Tag } from '../../components';
+import { TopPageComponentProps } from './TopPageComponent.props';
+import styles from './TopPageComponent.module.css';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
@@ -19,9 +18,12 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
                 <Htag tag='h2'>Vacation - {page.category}</Htag>
                 <Tag color='red' size='m'>hh.ru</Tag>
             </div>
-            {firstCategory == TopLevelCategory.Courses &&
+            {firstCategory == TopLevelCategory.Courses && page.hh &&
                 <HhData {...page.hh} />
             }
+            {page.advantages && page.advantages.length > 0 && <>
+                <Htag tag='h2'>Advantages</Htag>
+            </>}
         </div>
     );
 };
