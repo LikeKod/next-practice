@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 
-export interface SortProsp extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface SortProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     sort: SortEnum;
     setSort: (sort: SortEnum) => void
 }
