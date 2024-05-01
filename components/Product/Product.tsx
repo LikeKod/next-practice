@@ -4,6 +4,8 @@ import styles from './Product.module.css';
 import { Rating } from "../Rating/Rating";
 import { Tag } from "../Tag/Tag";
 import { Button } from "../Button/Button";
+import { priceRu } from "../../helpers/helpers";
+import { Divider } from "../Divider/Divider";
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
     return (
@@ -15,16 +17,17 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
                 {product.title}
             </div>
             <div className={styles.price}>
-                {product.price}
+                {priceRu(product.price)}
+                {product.oldPrice && <Tag className={styles.oldPrice} color="green">{priceRu(product.price - product.oldPrice)}</Tag>}
             </div>
             <div className={styles.credit}>
-                {product.credit}
+                {priceRu(product.credit)}/<span className={styles.month}>month</span>
             </div>
             <div className={styles.rating}>
                 <Rating rating={product.reviewAvg ?? product.initialRating} />
             </div>
             <div className={styles.tags}>
-                {product.categories.map(c => <Tag key={c} color="ghost">{c}</Tag>)}
+                {product.categories.map(c => <Tag key={c} className={styles.category} color="ghost">{c}</Tag>)}
             </div>
             <div className={styles.priceTitle}>
                 Price
@@ -35,7 +38,7 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
             <div className={styles.rateTitle}>
                 {product.reviewCount} reviews
             </div>
-            <div className={styles.hr}><hr /></div>
+            <Divider className={styles.hr}/>
             <div className={styles.description}>
                 {product.description}
             </div>
@@ -43,19 +46,19 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
                 feature
             </div>
             <div className={styles.advBlock}>
-                <div className={styles.advantages}>
-                   <div>Advantages</div>
+                {product.advantages && <div className={styles.advantages}>
+                   <div className={styles.advTitle}>Advantages</div>
                    <div>{product.advantages}</div>
-                </div>
-                <div className={styles.disadvantages}>
-                   <div>Disdvantages</div>
+                </div>}
+                {product.disadvantages && <div className={styles.disadvantages}>
+                   <div className={styles.advTitle}>Disdvantages</div>
                    <div>{product.disadvantages}</div>
-                </div>
+                </div>}
             </div>
-            <div className={styles.hr}><hr /></div>
+            <Divider className={styles.hr}/>
             <div className={styles.actions}>
                 <Button appearance="primary">About</Button>
-                <Button appearance="ghost" arrow={'right'}>Read reviews</Button>
+                <Button appearance="ghost" arrow={'right'} className={styles.reviewButton}>Read reviews</Button>
             </div>
         </Card>
     );
