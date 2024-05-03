@@ -7,12 +7,18 @@ import { Button } from "../Button/Button";
 import { priceRu } from "../../helpers/helpers";
 import { declOfNum } from "../../helpers/helpers";
 import { Divider } from "../Divider/Divider";
+import Image from "next/image";
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
     return (
         <Card className={styles.product}>
             <div className={styles.logo}>
-                <img src={process.env.NEXT_PUBLIC_DOMAIN+product.image} alt={product.title} />
+                <Image 
+                    src={process.env.NEXT_PUBLIC_DOMAIN + product.image} 
+                    alt={product.title} 
+                    width={70} 
+                    height={70} 
+                    />
             </div>
             <div className={styles.title}>
                 {product.title}
@@ -39,7 +45,7 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
             <div className={styles.rateTitle}>
                 {product.reviewCount} {declOfNum(product.reviewCount, ['review', 'revews', 'revews'])}
             </div>
-            <Divider className={styles.hr}/>
+            <Divider className={styles.hr} />
             <div className={styles.description}>
                 {product.description}
             </div>
@@ -54,15 +60,15 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
             </div>
             <div className={styles.advBlock}>
                 {product.advantages && <div className={styles.advantages}>
-                   <div className={styles.advTitle}>Advantages</div>
-                   <div>{product.advantages}</div>
+                    <div className={styles.advTitle}>Advantages</div>
+                    <div>{product.advantages}</div>
                 </div>}
                 {product.disadvantages && <div className={styles.disadvantages}>
-                   <div className={styles.advTitle}>Disdvantages</div>
-                   <div>{product.disadvantages}</div>
+                    <div className={styles.advTitle}>Disdvantages</div>
+                    <div>{product.disadvantages}</div>
                 </div>}
             </div>
-            <Divider className={styles.hr}/>
+            <Divider className={styles.hr} />
             <div className={styles.actions}>
                 <Button appearance="primary">About</Button>
                 <Button appearance="ghost" arrow={'right'} className={styles.reviewButton}>Read reviews</Button>

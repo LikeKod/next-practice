@@ -5,6 +5,10 @@ module.exports = {
     images: {
         domains: ['courses-top.ru']
     },
+    // eslint-disable-next-line no-dupe-keys
+    images: {
+        domains: ['courses-top.ru']
+    },
     webpack(config, options) {
         config.module.rules.push({
             loader: '@svgr/webpack',
