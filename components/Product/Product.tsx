@@ -8,6 +8,7 @@ import { priceRu } from "../../helpers/helpers";
 import { declOfNum } from "../../helpers/helpers";
 import { Divider } from "../Divider/Divider";
 import Image from "next/image";
+import cn from 'clsx';
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
     return (
@@ -68,7 +69,7 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
                     <div>{product.disadvantages}</div>
                 </div>}
             </div>
-            <Divider className={styles.hr} />
+            <Divider className={cn(styles.hr, styles.hr2)} />
             <div className={styles.actions}>
                 <Button appearance="primary">About</Button>
                 <Button appearance="ghost" arrow={'right'} className={styles.reviewButton}>Read reviews</Button>
