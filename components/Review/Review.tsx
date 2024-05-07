@@ -12,7 +12,7 @@ export const Review = ({ review, children, className, ...props }: ReviewProps): 
     return (
         <div className={cn(styles.review, className)} {...props}>
             <UserIcon className={styles.user}/>
-            <div>
+            <div className={styles.title}>
                 <span className={styles.name}>{name}: </span>&nbsp;&nbsp
                 <span>{title}</span>
             </div>
