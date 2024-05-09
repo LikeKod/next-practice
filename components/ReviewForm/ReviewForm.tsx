@@ -5,19 +5,32 @@ import cn from 'clsx';
 import { Input } from "../Input/Input";
 import { Rating } from "../Rating/Rating";
 import { TextArea } from "../TextArea/TextArea";
+import { useForm, Controller } from "react-hook-form";
+import { IReviewForm } from "./ReviewForm.interface";
 
 export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFormProps): JSX.Element => {
+    const {register, control, handleSubmit} = useForm<IReviewForm>();
+
+    const onSubmit = (data: IReviewForm) => {
+        console.log(data)
+    };
 
     return (
-        <>
+        <form onSubmit={handleSubmit()}>
             <div className={cn(styles.reviewForm, className)} {...props}>
-                <Input placeholder="Name" />
-                <Input placeholder="Title review" className={styles.title} />
+                <Input {...register('name')} placeholder="Name" />
+                <Input {...register('title')} placeholder="Title review" className={styles.title} />
                 <div className={styles.rating}>
                     <span>Rating:</span>
-                    <Rating rating={0} />
+                    <Controller 
+                        control={control} 
+                        name="rating"
+                        render={({field}) => (
+                            <Rating isEditable rating={field.value} ref={field.ref} setRating={field.onChange} />
+                        )}    
+                    />
                 </div>
-                <TextArea placeholder="Review contain" className={styles.description} />
+                <TextArea {...register('description')} placeholder="Review contain" className={styles.description} />
                 <div className={styles.submit}>
                     <Button appearance='primary'>Send</Button>
                     <span className={styles.info}>*Before public text will be examination</span>
@@ -31,6 +44,6 @@ export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFo
                 <CloseIcon className={styles.close}/>
             </div>
 
-        </>
+        </form>
     );
 };
