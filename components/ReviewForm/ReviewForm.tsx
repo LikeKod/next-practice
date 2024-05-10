@@ -9,7 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import { IReviewForm } from "./ReviewForm.interface";
 
 export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFormProps): JSX.Element => {
-    const {register, control, handleSubmit} = useForm<IReviewForm>();
+    const {register, control, handleSubmit, formState: {errors}} = useForm<IReviewForm>();
 
     const onSubmit = (data: IReviewForm) => {
         console.log(data)
@@ -18,8 +18,15 @@ export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFo
     return (
         <form onSubmit={handleSubmit()}>
             <div className={cn(styles.reviewForm, className)} {...props}>
-                <Input {...register('name')} placeholder="Name" />
-                <Input {...register('title')} placeholder="Title review" className={styles.title} />
+                <Input 
+                    {...register('name', {required: {value: true, message: 'Write your name'}})} placeholder="Name" 
+                    error={errors.name}
+                />
+                <Input 
+                    {...register('title', {required: {value: true, message: 'Write title'}})} placeholder="Title review" 
+                    error={errors.title}
+                    className={styles.title} 
+                />
                 <div className={styles.rating}>
                     <span>Rating:</span>
                     <Controller 
@@ -30,7 +37,10 @@ export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFo
                         )}    
                     />
                 </div>
-                <TextArea {...register('description')} placeholder="Review contain" className={styles.description} />
+                <TextArea 
+                    {...register('description', {required: {value: true, message: 'Write description'}})} placeholder="Review contain" className={styles.description} 
+                    error={errors.description}
+                />
                 <div className={styles.submit}>
                     <Button appearance='primary'>Send</Button>
                     <span className={styles.info}>*Before public text will be examination</span>
