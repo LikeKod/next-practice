@@ -6,46 +6,62 @@ import { Input } from "../Input/Input";
 import { Rating } from "../Rating/Rating";
 import { TextArea } from "../TextArea/TextArea";
 import { useForm, Controller } from "react-hook-form";
-import { IReviewForm } from "./ReviewForm.interface";
+import { IReviewForm, IReviewSentResponse } from "./ReviewForm.interface";
+import { API } from "../../app/api";
+import axios from "axios";
+import { useState } from "react";
 
-export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFormProps): JSX.Element => {
-    const {register, control, handleSubmit, formState: {errors}} = useForm<IReviewForm>();
+export const ReviewForm = ({ productId, children, className, ...props }: ReviewFormProps): JSX.Element => {
+    const { register, control, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
+    const [error, setError] = useState<string>();
 
-    const onSubmit = (data: IReviewForm) => {
-        console.log(data)
+
+    const onSubmit = async (formData: IReviewForm) => {
+        try {
+            const { data } = await axios.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId });
+            if (data.message) {
+                setIsSuccess(true);
+                reset();
+            } else {
+                setError('Something is wrong');
+            }
+        } catch (e) {
+            setError(e.message);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit()}>
             <div className={cn(styles.reviewForm, className)} {...props}>
-                <Input 
-                    {...register('name', {required: {value: true, message: 'Write your name'}})} placeholder="Name" 
+                <Input
+                    {...register('name', { required: { value: true, message: 'Write your name' } })} placeholder="Name"
                     error={errors.name}
                 />
-                <Input 
-                    {...register('title', {required: {value: true, message: 'Write title'}})} placeholder="Title review" 
+                <Input
+                    {...register('title', { required: { value: true, message: 'Write title' } })} placeholder="Title review"
                     error={errors.title}
-                    className={styles.title} 
+                    className={styles.title}
                 />
                 <div className={styles.rating}>
                     <span>Rating:</span>
-                    <Controller 
-                        control={control} 
+                    <Controller
+                        control={control}
                         name="rating"
-                        rules={{required: {value: true, message: 'Indicate rating'}}}
-                        render={({field}) => (
-                            <Rating 
-                                isEditable 
-                                rating={field.value} 
-                                ref={field.ref} 
+                        rules={{ required: { value: true, message: 'Indicate rating' } }}
+                        render={({ field }) => (
+                            <Rating
+                                isEditable
+                                rating={field.value}
+                                ref={field.ref}
                                 setRating={field.onChange}
-                                error={errors.rating} 
+                                error={errors.rating}
                             />
-                        )}    
+                        )}
                     />
                 </div>
-                <TextArea 
-                    {...register('description', {required: {value: true, message: 'Write description'}})} placeholder="Review contain" className={styles.description} 
+                <TextArea
+                    {...register('description', { required: { value: true, message: 'Write description' } })} placeholder="Review contain" className={styles.description}
                     error={errors.description}
                 />
                 <div className={styles.submit}>
@@ -53,13 +69,15 @@ export const ReviewForm = ({ prductId, children, className, ...props }: ReviewFo
                     <span className={styles.info}>*Before public text will be examination</span>
                 </div>
             </div>
-            <div className={styles.success}>
-                <div className={styles.successTitle}>Your review be send</div>
-                <div>
-                    Thanks for your review!
+            {isSuccess &&
+                <div className={styles.success}>
+                    <div className={styles.successTitle}>Your review be send</div>
+                    <div>
+                        Thanks for your review!
+                    </div>
+                    <CloseIcon className={styles.close} />
                 </div>
-                <CloseIcon className={styles.close}/>
-            </div>
+            }
 
         </form>
     );

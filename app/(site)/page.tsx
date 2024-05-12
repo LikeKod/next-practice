@@ -7,6 +7,7 @@ import { GetStaticProps, Metadata } from "next";
 import { MenuItem } from "../../interfaces/menu.interface";
 import { getMenu } from "../../api/menu";
 import Menu from "../../components/menu/menu";
+import { API } from "../api";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -31,7 +32,7 @@ export default async function Home(){
 
 export const getInitialProps: GetStaticProps<HomeProps> = async () => {
   const firstCategory = 0;
-  const {data: menu} = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+  const {data: menu} = await axios.post<MenuItem[]>(API.topPage.find, {
     firstCategory
   });
   return {
