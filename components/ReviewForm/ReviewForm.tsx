@@ -70,15 +70,19 @@ export const ReviewForm = ({ productId, children, className, ...props }: ReviewF
                 </div>
             </div>
             {isSuccess &&
-                <div className={styles.success}>
+                <div className={cn(styles.success, styles.panel)}>
                     <div className={styles.successTitle}>Your review be send</div>
                     <div>
                         Thanks for your review!
                     </div>
-                    <CloseIcon className={styles.close} />
+                    <CloseIcon className={styles.close} onClick={() => setIsSuccess(false)} />
                 </div>
             }
-
+            {error && <div className={cn(styles.error, styles.panel)}>
+                Something broke... try refresh page!S
+                <CloseIcon className={styles.close} onClick={() => setError(undefined)}/>
+            </div>
+            }
         </form>
     );
 };

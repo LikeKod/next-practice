@@ -28,6 +28,10 @@
     white-space: nowrap;
 }
 
+.rateTitle a {
+    color: var(--primary);
+}
+
 .hr, .description, .actions{
     grid-column: start / end;
 }
