@@ -36,16 +36,8 @@
     border-left: 1px solid #DFDFDF;
 }
 
-.secondBlockOpened:last-child {
-    margin-bottom: 20px;
-}
-
-.secondBlockOpened {
-    display: block;
-}
-
 .secondLevelBlock {
-    display: none;
+    overflow: hidden;
 }
 
 .thirdLevel {
