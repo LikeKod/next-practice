@@ -1,5 +1,6 @@
 'use client';
 
+import { Up } from "../../components";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import { SideBar } from "../../components/SideBar/SideBar";
@@ -32,6 +33,7 @@ export default function RootLayout({
           {two}
         </div>
         <Footer className={styles.footer}/>
+        <Up />
       </div>
     </body>
   </html>
