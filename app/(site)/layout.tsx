@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from "react";
 import { Up } from "../../components";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import { SideBar } from "../../components/SideBar/SideBar";
 // import type { Metadata } from "next";
 import styles from "./layout.module.css";
+import cn from 'clsx';
 
 
 
@@ -22,9 +24,14 @@ export default function RootLayout({
   two: React.ReactNode
 }>) {
 
+  const [isSkipLink, setIsSkipLink] = useState<boolean>(false);
+
   return (<html lang='en'>
     <body>
       <div className={styles.wrapper}>
+        <a tabIndex={1} onFocus={() => setIsSkipLink(true)} className={cn(styles.skipLink, {
+          [styles.displayed]: isSkipLink
+        })}>Go to contain</a>
         <Header className={styles.header}/>
         <SideBar className={styles.sidebar}/>
         <div className={styles.body}>

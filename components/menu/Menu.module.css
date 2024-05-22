@@ -25,7 +25,6 @@
     text-transform: uppercase;
     color: var(--gray-dark);
     font-size: 12px;
-    line-height: 16px;
 }
 
 .secondBlock {
@@ -49,6 +48,8 @@
 
     font-size: 14px;
     line-height: 19px;
+
+    outline-offset: -1px;
 }
 
 .thirdLevelActive,
