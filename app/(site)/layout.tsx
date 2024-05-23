@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Up } from "../../components";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
@@ -25,16 +25,30 @@ export default function RootLayout({
 }>) {
 
   const [isSkipLink, setIsSkipLink] = useState<boolean>(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  const skipContentAction = (key: KeyboardEvent) => {
+    if(key.code == 'Space' || key.code == 'Enter'){
+      key.preventDefault();
+      bodyRef.current?.focus();
+    }
+    setIsSkipLink(false);
+  };
 
   return (<html lang='en'>
     <body>
       <div className={styles.wrapper}>
-        <a tabIndex={1} onFocus={() => setIsSkipLink(true)} className={cn(styles.skipLink, {
-          [styles.displayed]: isSkipLink
-        })}>Go to contain</a>
+        <a 
+          tabIndex={1} 
+          onFocus={() => setIsSkipLink(true)} 
+          className={cn(styles.skipLink, {
+            [styles.displayed]: isSkipLink
+          })}
+          onKeyDown={skipContentAction}
+        >Go to contain</a>
         <Header className={styles.header}/>
         <SideBar className={styles.sidebar}/>
-        <div className={styles.body}>
+        <div className={styles.body} ref={bodyRef} tabIndex={0}>
           {children}
           {one}
           {two}
