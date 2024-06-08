@@ -48,11 +48,11 @@ export default function RootLayout({
         >Go to contain</a>
         <Header className={styles.header}/>
         <SideBar className={styles.sidebar}/>
-        <div className={styles.body} ref={bodyRef} tabIndex={0}>
+        <main className={styles.body} ref={bodyRef} tabIndex={0} role="main">
           {children}
           {one}
           {two}
-        </div>
+        </main>
         <Footer className={styles.footer}/>
         <Up />
       </div>

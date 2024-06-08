@@ -111,10 +111,8 @@ export default async function Menu() {
   };
 
   return (
-    <main >
-      <div className={styles.menu}>
+      <nav className={styles.menu} role="navigation">
         {buildFirstLevel()}
-      </div>
-    </main>
+      </nav>
   );
 }

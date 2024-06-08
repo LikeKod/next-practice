@@ -7,7 +7,7 @@ import SearchIcon from './Search.svg';
 import cn from 'clsx';
 import { useRouter } from "next/router";
 
-export const Search = ({className, ...props}: SearchProps): JSX.Element => {
+export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
     const [search, setSearch] = useState<string>('');
     const router = useRouter();
 
@@ -21,17 +21,17 @@ export const Search = ({className, ...props}: SearchProps): JSX.Element => {
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-        if(e.key == 'Enter'){
+        if (e.key == 'Enter') {
             goToSearch();
         }
     };
 
     return (
-        <div className={cn(className, styles.search)} {...props}>
-            <Input 
-                className={styles.input} 
-                placeholder="Search..." 
-                value={search} 
+        <form className={cn(className, styles.search)} {...props} role="search">
+            <Input
+                className={styles.input}
+                placeholder="Search..."
+                value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={handleKeyDown}
             />
@@ -44,6 +44,6 @@ export const Search = ({className, ...props}: SearchProps): JSX.Element => {
                 <SearchIcon />
 
             </Button>
-        </div>
+        </form>
     );
 };
