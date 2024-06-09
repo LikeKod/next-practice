@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Button } from "../Button/Button";
 
 export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProps): JSX.Element => {
-    const { register, control, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
+    const { register, control, handleSubmit, formState: { errors }, reset, clearErrors } = useForm<IReviewForm>();
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
     const [error, setError] = useState<string>();
 
@@ -39,12 +39,14 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
                     {...register('name', { required: { value: true, message: 'Write your name' } })} placeholder="Name"
                     error={errors.name}
                     tabIndex={isOpened ? 0 : -1}
+                    aria-invalid={errors.name ? true : false}
                 />
                 <Input
                     {...register('title', { required: { value: true, message: 'Write title' } })} placeholder="Title review"
                     error={errors.title}
                     className={styles.title}
                     tabIndex={isOpened ? 0 : -1}
+                    aria-invalid={errors.title ? true : false}
                 />
                 <div className={styles.rating}>
                     <span>Rating:</span>
@@ -68,9 +70,11 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
                     {...register('description', { required: { value: true, message: 'Write description' } })} placeholder="Review contain" className={styles.description}
                     error={errors.description}
                     tabIndex={isOpened ? 0 : -1}
+                    aria-label="Text review"
+                    aria-invalid={errors.description ? true : false}
                 />
                 <div className={styles.submit}>
-                    <Button tabIndex={isOpened ? 0 : -1} appearance='primary'>Send</Button>
+                    <Button tabIndex={isOpened ? 0 : -1} appearance='primary' onClick={() => clearErrors()}>Send</Button>
                     <span className={styles.info}>*Before public text will be examination</span>
                 </div>
             </div>
