@@ -79,17 +79,21 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
                 </div>
             </div>
             {isSuccess &&
-                <div className={cn(styles.success, styles.panel)}>
+                <div className={cn(styles.success, styles.panel)} role="alert">
                     <div className={styles.successTitle}>Your review be send</div>
                     <div>
                         Thanks for your review!
                     </div>
-                    <CloseIcon className={styles.close} onClick={() => setIsSuccess(false)} />
+                    <button onClick={() => setIsSuccess(false)} className={styles.close} aria-label="Close alert">
+                        <CloseIcon />
+                    </button>
                 </div>
             }
-            {error && <div className={cn(styles.error, styles.panel)}>
+            {error && <div className={cn(styles.error, styles.panel)} role="alert">
                 Something broke... try refresh page!S
-                <CloseIcon className={styles.close} onClick={() => setError(undefined)}/>
+                <button onClick={() => setError(undefined)} className={styles.close} aria-label="Close alert">
+                    <CloseIcon />
+                </button>
             </div>
             }
         </form>
