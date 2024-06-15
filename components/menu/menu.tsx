@@ -6,7 +6,7 @@ import { TopLevelCategory } from "../../interfaces/page.interface";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { firstLevelMenu } from "../../helpers/helpers";
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from "react";
 
 
@@ -14,20 +14,14 @@ export default async function Menu() {
   const menu = await getMenu(0);
   const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>();
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
 
-  const openSecondLevel = (secondCategory: string) => {
-    // setMenu && setMenu(menu.map(m => {
-    //   if (m._id.secondCategory == secondCategory) {
-    //     m.isOpened = !m.isOpened;
-    //   }
-    //   return m;
-    // }));
-  };
+
 
   const variants = {
     visible: {
       marginBottom: 20,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         when: 'beforeChildren',
         staggerChildren: 0.1,
       }
@@ -40,7 +34,17 @@ export default async function Menu() {
       opacity: 1,
       height: 29
     },
-    hidden: { opacity: 0, height: 0 }
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, height: 0 }
+  };
+
+  const openSecondLevel = (secondCategory: string) => {
+    setMenu && setMenu(menu.map(m => {
+      if (m._id.secondCategory == secondCategory) {
+        setAnnounce(m.isOpened ? 'closed' : 'opened');
+        m.isOpened = !m.isOpened;
+      }
+      return m;
+    }));
   };
 
   const openSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
@@ -52,7 +56,7 @@ export default async function Menu() {
 
   const buildFirstLevel = () => {
     return (
-      <ul>
+      <ul className={styles.firstLevelList}>
         {firstLevelMenu.map(m => (
           <li key={m.route} aria-expanded={m.id == TopLevelCategory.Courses}>
             <Link href={`/${m.route}`}>
@@ -85,7 +89,7 @@ export default async function Menu() {
                 onClick={() => openSecondLevel(m._id.secondCategory)}
               >{m._id.secondCategory}</button>
               <motion.div
-                className={cn(styles.secondLevelBlock)}
+                className={styles.secondLevelBlock}
                 layout
                 variants={variants}
                 initial={m.isOpened ? 'visible' : 'hidden'}
@@ -103,9 +107,14 @@ export default async function Menu() {
     return (
       pages.map(p => (
         <motion.li key={p._id} variants={variantsChildren}>
-          <Link tabIndex={isOpened ? 0 : -1} href={`/${route}/${p.alias}`} className={cn(styles.thirdLevel, {
-            [styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
-          })}>
+          <Link 
+            tabIndex={isOpened ? 0 : -1} 
+            href={`/${route}/${p.alias}`} 
+            className={cn(styles.thirdLevel, {
+              [styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
+            })}
+            aria-current={`/${route}/${p.alias}` == router.asPath ? 'page' : false}
+          >
             {p.category}
           </Link>
         </motion.li>

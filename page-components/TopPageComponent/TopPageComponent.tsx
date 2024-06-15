@@ -6,10 +6,11 @@ import { SortEnum } from '../../components/Sort/Sort.props';
 import { useEffect, useReducer } from 'react';
 import { sortReducer } from './sort.reducer';
 import { useScrollY } from '../../hooks/useScrollY';
+import { useReducedMotion } from 'framer-motion';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
     const [{products: sortProducts, sort}, dispatchSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
-    const y = useScrollY();
+    const shouldReduceMotion = useReducedMotion();
 
     const setSort = (sort: SortEnum) => {
         dispatchSort({type: sort});
@@ -26,8 +27,8 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
                 {products && <Tag color='green' size='m' aria-label={products.length + 'Element'}>{products.length}</Tag>}
                 <Sort sort={sort} setSort={setSort}/>
             </div>
-            <div>
-                {sortProducts && sortProducts.map(p => (<Product layout product={p} key={p._id}/>))}
+            <div role='list'>
+                {sortProducts && sortProducts.map(p => (<Product layout={shouldReduceMotion ? false : true} product={p} role='listitem' key={p._id}/>))}
             </div>
             <div className={styles.hhTitle}>
                 <Htag tag='h2'>Vacation - {page.category}</Htag>
