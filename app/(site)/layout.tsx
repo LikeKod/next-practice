@@ -8,6 +8,10 @@ import { SideBar } from "../../components/SideBar/SideBar";
 // import type { Metadata } from "next";
 import styles from "./layout.module.css";
 import cn from 'clsx';
+import { Open_Sans } from 'next/font/google';
+import Script from "next/script";
+
+const inter = Open_Sans({ subsets: ['latin'] });
 
 
 
@@ -28,7 +32,7 @@ export default function RootLayout({
   const bodyRef = useRef<HTMLDivElement>(null);
 
   const skipContentAction = (key: KeyboardEvent) => {
-    if(key.code == 'Space' || key.code == 'Enter'){
+    if (key.code == 'Space' || key.code == 'Enter') {
       key.preventDefault();
       bodyRef.current?.focus();
     }
@@ -36,24 +40,27 @@ export default function RootLayout({
   };
 
   return (<html lang='en'>
-    <body>
+    <head>
+      <Script src="" strategy="beforeInteractive"/>
+    </head>
+    <body className={inter.className}>
       <div className={styles.wrapper}>
-        <a 
-          tabIndex={1} 
-          onFocus={() => setIsSkipLink(true)} 
+        <a
+          tabIndex={1}
+          onFocus={() => setIsSkipLink(true)}
           className={cn(styles.skipLink, {
             [styles.displayed]: isSkipLink
           })}
           onKeyDown={skipContentAction}
         >Go to contain</a>
-        <Header className={styles.header}/>
-        <SideBar className={styles.sidebar}/>
+        <Header className={styles.header} />
+        <SideBar className={styles.sidebar} />
         <main className={styles.body} ref={bodyRef} tabIndex={0} role="main">
           {children}
           {one}
           {two}
         </main>
-        <Footer className={styles.footer}/>
+        <Footer className={styles.footer} />
         <Up />
       </div>
     </body>
