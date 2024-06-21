@@ -13,7 +13,7 @@ import { Error404 } from '../404';
 import { ParsedUrlQuery } from 'querystring';
 import { API } from '../../api';
 
-function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+function TopPage({ firstCategory, page, products, router }: TopPageProps): JSX.Element {
 	if (!page || !products) {
 		return <Error404 />;
 	}
@@ -25,6 +25,9 @@ function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 			<meta property="og:title" content={page.metaTitle} />
 			<meta property="og:description" content={page.metaDescription} />
 			<meta property="og:type" content="article" />
+			<meta property="og:url" content={process.env.NEXT_PUBLIC_DOMAIN + router.asPath} />
+			<meta property="og:locale" content='ru_RU'/>
+
 		</Head>
 		<TopPageComponent
 			firstCategory={firstCategory}

@@ -8,10 +8,12 @@ import { MenuItem } from "../../interfaces/menu.interface";
 import { getMenu } from "../../api/menu";
 import Menu from "../../components/menu/menu";
 import { API } from "../api";
+import { getPage } from "../../api/page";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({params}: {params: {alias: string}}): Promise<Metadata> {
+  const page = await getPage(params.alias);
   return {
-    title: 'Raiting project'
+    title: page?.metaTitles
   };
 }
 
