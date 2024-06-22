@@ -10,6 +10,8 @@ import styles from "./layout.module.css";
 import cn from 'clsx';
 import { Open_Sans } from 'next/font/google';
 import Script from "next/script";
+import ym from "react-yandex-metrika";
+import { YMInitializer } from "react-yandex-metrika";
 
 const inter = Open_Sans({ subsets: ['latin'] });
 
@@ -39,10 +41,17 @@ export default function RootLayout({
     setIsSkipLink(false);
   };
 
+  router.events.on('routeChangeComplete', (url: string) => {
+    if (typeof window !== 'undefined') {
+      ym('hit', url)
+    }
+  });
+
   return (<html lang='en'>
     <head>
-      <Script src="" strategy="beforeInteractive"/>
+      <Script src="" strategy="beforeInteractive" />
     </head>
+    <YMInitializer accounts={[]} options={{ webvisor: true, defer: true }} version='2' />
     <body className={inter.className}>
       <div className={styles.wrapper}>
         <a
